@@ -11,10 +11,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
+#        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'D:/Web/PythonWorks/higiprag/banco.sqlite',                      # Or path to database file if using sqlite3.
-#        'USER': '',                      # Not used with sqlite3.
-#        'PASSWORD': '',                  # Not used with sqlite3.
+#        'NAME': 'jayquest_higi',                      # Not used with sqlite3.
+#        'USER': 'jayquest_higi',                      # Not used with sqlite3.
+#        'PASSWORD': '#h1g1pr4g#',                  # Not used with sqlite3.
 #        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
 #        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -50,7 +52,9 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
+#MEDIA_ROOT = '/home/jayquest/webapps/higiprag_media/'
 MEDIA_ROOT = ''
+
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -61,6 +65,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
+#STATIC_ROOT = '/home/jayquest/webapps/higiprag_static/'
 STATIC_ROOT = ''
 
 # URL prefix for static files.
@@ -75,8 +80,9 @@ STATICFILES_DIRS = (
     ('css','D:/Web/PythonWorks/higiprag/templates/maxx-clean/css'),
     ('images','D:/Web/PythonWorks/higiprag/templates/maxx-clean/images'),
     ('js','D:/Web/PythonWorks/higiprag/templates/maxx-clean/js'),
-#    ('scripts','D:/Web/PythonWorks/higiprag/templates/maxx-clean/scripts'),
-#    ('sprite','D:/Web/PythonWorks/higiprag/templates/maxx-clean/sprite'),
+#    ('css','/home/jayquest/webapps/higiprag/higiprag/templates/maxx-clean/css'),
+#    ('images','/home/jayquest/webapps/higiprag/higiprag/templates/maxx-clean/images'),
+#    ('js','/home/jayquest/webapps/higiprag/higiprag/templates/maxx-clean/js'),
 )
 
 # List of finder classes that know how to find static files in
@@ -126,7 +132,10 @@ TEMPLATE_CONTEXT_PROCESSORS = ( "django.contrib.auth.context_processors.auth",
                                 "conteudo.views.features_list"
     )
 
-TEMPLATE_DIRS = ('D:/Web/PythonWorks/higiprag/templates/maxx-clean',)
+TEMPLATE_DIRS = (
+    'D:/Web/PythonWorks/higiprag/templates/maxx-clean',
+    '/home/jayquest/webapps/higiprag/higiprag/templates/maxx-clean',
+    )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -206,3 +215,4 @@ CKEDITOR_CONFIGS = {
 
 
 CKEDITOR_UPLOAD_PATH = 'd:/Web/PythonWorks/higiprag/ckeditor'
+#CKEDITOR_UPLOAD_PATH = '/home/jayquest/webapps/higiprag/higiprag_media/ckeditor'
