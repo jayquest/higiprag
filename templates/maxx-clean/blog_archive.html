@@ -1,0 +1,11 @@
+<!--box-->
+<div class="box">
+    <h1 class="first-word double-color sp">Arquivo</h1>
+
+    <ul class="list cat">
+        {% for mes in arquivo %}
+        <li><a href="{% url arquivo mes.slug %}" title="">{{ mes.data|date:'M Y' }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<!--/box-->

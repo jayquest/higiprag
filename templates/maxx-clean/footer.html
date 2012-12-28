@@ -1,0 +1,81 @@
+{% load webdesign %}
+
+<!--Footer content-->
+<div class="full-width-wrapper" id="footer-wrapper">
+    <div class="fixed-width-wrapper" id="footer-content">
+        <div class="three-column">
+            <div class="block">
+                <h3 class="first-word">Nossos Serviços</h3>
+                <div class="content">
+                    <ul class="latest-news list">
+                        {% for p in lista_servicos %}
+                        {% if forloop.counter < 4 %}
+                            <li>
+                                <a href="{% url ler p.slug %}" title="{{ p.titulo }}"><strong>{{ p.titulo }}</strong></a>
+                                <p>{{ p.intro|truncatewords:10 }}</p>
+                            </li>
+                        {% endif %}
+                        {% empty %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="block">
+                <h3 class="first-word">Sobre nós</h3>
+                <div class="content">
+                    {% lorem 1 p %}
+                </div>
+            </div>
+            <div class="block">
+                <h3 class="first-word">Ultimas Notícias</h3>
+                <div class="content">
+                    <ul class="latest-news list">
+                        {% for p in last_posts %}
+                            {% if forloop.counter < 3 %}
+                            <li>
+                                <div class="calendar black"><h1>{{ p.data_pub|date:'d' }}</h1><span>{{ p.data_pub|date:'M' }}</span></div>
+                                <a href="{% url ler p.slug %}" title="{{ p.titulo }}"><strong>{{ p.titulo }}</strong></a>
+                                <p>{{ p.intro|truncatewords:15 }}</p>
+                            </li>
+                            {% endif %}
+                        {% empty %}
+                        <li>
+                            <div class="calendar black"><h1>30</h1><span>Mar</span></div>
+                            <a href="#" title=""><strong>The top 5 best free font Mar 2011</strong></a>
+                            <p>Aliquam congue ferme ntum nisl auris accumsan nullavel diam. Sed in lacus ut enim adipis.</p>
+                        </li>
+
+                        <li>
+                            <div class="calendar black"><h1>30</h1><span>Mar</span></div>
+                            <a href="#" title=""><strong>The top 5 best free font Mar 2011</strong></a>
+                            <p>Aliquam congue ferme ntum nisl auris accumsan nullavel diam. Sed in lacus ut enim adipis.</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
+                    <a href="{% url artigos %}" class="link view-all" title="">Ver as ultimas publicações</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--/Footer content-->
+
+<!--Footer Extra-->
+<div class="full-width-wrapper" id="footer-extra-wrapper">
+    <div class="fixed-width-wrapper">
+        <div id="copyright">
+            <a href="#" class="logo float-left" title=""><img src="{{STATIC_URL}}images/logo-footer.png" alt=""></a>
+
+            <ul>
+                <li>(c) 2012 HIGIPRAG,  Todos os direitos reservados </li>
+                <li><a href="http://www.jwg.com.br" title="JWG Soluções para Internet">JWG Soluções para Internet</a></li>
+            </ul>
+            <a href="#" class="back-to-top sprite" title="Back to top">Topo</a>
+        </div>
+
+    </div>
+</div>
+<!--/Footer Extra-->

@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load image_format i18n %}
+
+{% block content %}
+    <!--Body content-->
+    <div class="full-width-wrapper">
+    	<div class="fixed-width-wrapper" id="body-content">
+        	<!--Content-->
+        	<div id="content" class="fixed-width-wrapper">
+            	<div class="header-text">
+                	<ul id="breadcrumbs">
+                    	<li><a href="{% url home %}" title="">Página Inicial</a></li>
+                        <li class="current"><a href="#" title="">Serviços</a></li>
+                    </ul>
+                    
+                    <h1 class="first-word double-color sp">Nossos Serviços</h1>
+                    
+                </div>
+                
+                <div class="post entry-content">
+                	<img src="images/pix/mock.png" alt="" class="align-left" >
+                
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus lorem a metus aliquet non scelerisque dolor volutpat. Cras et quam quis libero semper tempus congue id lacus. Nulla et sagittis augue. </p>
+                    <p>Nulla interdum mauris quis nunc tempus ac bibendum nunc volutpat. Integer gravida sapien non orci iaculis eget dictum nisl auctor. Duis vulputate hendrerit turpis in ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc sed diam quam.</p>
+              	</div>
+                
+                <!--services-->
+                <div class="three-column fixed-width-wrapper services">
+                    {% for s in servicos %}
+
+                        <!--block-->
+                        <div class="block">
+                            <div class="service-heading">
+                                <img src="{{ s.imagem.url }}" height="48px" alt="" >
+                                <h3 class="first-word">{{  s.titulo }}</h3>
+                                <span>{{ s.tags.all }}</span>
+                            </div>
+
+                            <div class="content">
+                                <p class="justify">{{ s.intro }}</p>
+
+                            </div>
+                            <a class="read-more" href="{% url detalhar_servico s.slug%}" title="Read more">Leia mais</a>
+                        </div>
+                        <!--/block-->
+
+                    {% empty %}
+                    <!--block-->
+                    <div class="block">
+                    	<div class="service-heading">
+                        	<img src="images/icons/pencil_48.png" alt="" >
+                          <h3 class="first-word">Web Templates</h3>
+                            <span>Lorem ipsum dolor sit amet, consectetur....</span>
+                        </div>
+                        
+                        <div class="content">
+                           <p>Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. Vestibulum vehicula puVestibulum sit amet neque eu neque suscipit consequat quis vel risus</p>
+                           <p> Vestibulum vehicula purus nec dui accumsan fermentum. Suspendisse potenti. Ut dapibus est id odio pretium blandit in eget leo.</p>
+                           
+                        </div>
+                        <a class="read-more" href="#" title="Read more">Read more</a>
+                    </div>
+                    <!--/block-->
+                    
+                    
+                    <!--block-->
+                    <div class="block">
+                    	<div class="service-heading">
+                        	<img src="images/icons/statistics_48.png" alt="" >
+                        <h3 class="first-word">Web Development </h3>
+                            <span>Lorem ipsum dolor sit amet, consectetur....</span>
+                        </div>
+                        
+                        <div class="content">
+                           <p>Lorem ipsum dolor sit amet, <strong>consectetur adipisicing</strong> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                           <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                        <a class="read-more" href="#" title="Read more">Read more</a>
+                    </div>
+                    <!--/block-->
+                    
+                     <!--block-->
+                    <div class="block">
+                    	<div class="service-heading">
+                        	<img src="images/icons/briefcase_48.png" alt="" >
+                        <h3 class="first-word">Corporate Identity </h3>
+                            <span>Lorem ipsum dolor sit amet, consectetur....</span>
+                        </div>
+                        
+                        <div class="content">
+                           <p>Quisque vel semper nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; <strong>Sed nisi purus</strong>, pulvinar sit amet porttitor dictum, tempus sodales nisl. </p>
+                           <p>Aliquam nunc libero, volutpat ut tincidunt ac, accumsan ut felis. Donec suscipit viverra mauris, eget sollicitudin </p>
+                        </div>
+                        <a class="read-more" href="#" title="Read more">Read more</a>
+                    </div>
+                    <!--/block-->
+                    
+                    <!--block-->
+                    <div class="block">
+                    	<div class="service-heading">
+                        	<img src="images/icons/print_48.png" alt="" >
+                          <h3 class="first-word">Print & Media</h3>
+                            <span>Lorem ipsum dolor sit amet, consectetur....</span>
+                        </div>
+                        
+                        <div class="content">
+                           <p>Vestibulum sit amet neque eu neque suscipit consequat quis vel risus. Vestibulum vehicula purus nec dui accumsan fermentum. Suspendisse potenti. Ut dapibus est id odio pretium blandit in eget leo.</p>
+                           <p>Mauris et nisi urna <strong>nonfaucibus magna</strong>. Integer lacus ante then ullamcorper ut vulputate..</p>
+                        </div>
+                        <a class="read-more" href="#" title="Read more">Read more</a>
+                    </div>
+                    <!--/block-->
+                    
+                    
+                    <!--block-->
+                    <div class="block">
+                    	<div class="service-heading">
+                        	<img src="images/icons/star1_48.png" alt="" >
+                          <h3 class="first-word">Motion Graphics</h3>
+                            <span>Lorem ipsum dolor sit amet, consectetur....</span>
+                        </div>
+                        
+                        <div class="content">
+                           <p>Lorem ipsum dolor sit amet, <strong>consectetur adipisicing</strong> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                           <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                        <a class="read-more" href="#" title="Read more">Read more</a>
+                    </div>
+                    <!--/block-->
+                    
+                     <!--block-->
+                    <div class="block">
+                    	<div class="service-heading">
+                        	<img src="images/icons/bug_48.png" alt="" >
+                          <h3 class="first-word">Logo Design</h3>
+                            <span>Lorem ipsum dolor sit amet, consectetur....</span>
+                        </div>
+                        
+                        <div class="content">
+                           <p>Quisque vel semper nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; <strong>Sed nisi purus</strong>, pulvinar sit amet porttitor dictum, tempus sodales nisl. </p>
+                           <p>Aliquam nunc libero, volutpat ut tincidunt ac, accumsan ut felis. Donec suscipit viverra mauris, eget sollicitudin </p>
+                        </div>
+                        <a class="read-more" href="#" title="Read more">Read more</a>
+                    </div>
+                    <!--/block-->
+                    {% endfor %}
+                </div>
+                <!--/services-->
+                
+                
+            </div>
+            <!--/Content-->
+            
+           
+            <!--Get in touch-->
+            <div id="get-in-touch" class="fixed-width-wrapper">
+            	<div class="via-phone-number float-left">
+                	<a class="icon sprite float-left" title="Keep in touch with us">Keep in touch with us</a>
+                	<h2>We can Help You. Call Us <strong>+ 1 800 123 4567</strong></h2>
+                    <span>Keep in touch with our news and receive FREE THEMES</span>
+                </div>
+                <div class="via-email float-right">
+                	<form action="" method="post">
+                    	<div><input class="input-field border-radius-3px reset-text float-left" value="Enter your E-mail address..."></div>
+                        <div><button type="submit" class="black border-radius-3px float-right"><em class="sprite"></em>Subcribe !</button></div>
+                    </form>
+                </div>
+            </div>
+            <!--/Get in touch-->
+            
+            
+            
+        </div>
+    </div>
+    <!--/Body content-->
+{% endblock %}

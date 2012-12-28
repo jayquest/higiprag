@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load image_format i18n  %}
+
+
+{% block content %}
+
+    <!--Slider-->
+    <div class="clear" id="slider-bg">
+    	<div class="full-width-wrapper" id="slider-frame">
+        	
+        	<div class="fixed-width-wrapper maxx-theme" id="slider-wrapper">
+            	
+                <div id="slider" class="nivoSlider">
+                    {% for b in banners %}
+                    <a href="{{ b.link }}"><img src="{{ b.imagem|crop:'960x370' }}"  alt="" title="#htmlcaption{{ forloop.counter }}"></a>
+                    {% empty %}
+                    <a href="#"><img src="/static/images/pix/slide1.jpg" alt="" title="#htmlcaption2"></a>
+                    {% endfor %}
+                </div>
+                {% for b in banners %}
+                <div id="htmlcaption{{ forloop.counter }}" class="nivo-html-caption">
+                	<h1 class="first-word">{{ b.titulo }}</h1>
+                    {{ b.texto }}
+                </div>
+                {% empty %}
+                <div id="htmlcaption2" class="nivo-html-caption">
+                	<h1>Lorem ipsum dolor sit amet</h1>
+                    <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        
+    </div>
+    <!--/Slider-->
+
+    <!--Body content-->
+    <div class="full-width-wrapper">
+    	<div class="fixed-width-wrapper body-divider " id="body-content">
+        	<!--Entry-->
+        	<div class="entry three-column fixed-width-wrapper">
+            	<!--block-->
+            	<div class="block type1">
+                	<h1 class="first-word double-color">Quem somos ?</h1>
+                    <div class="content">
+                    	<a href="#" title="" class="preloading-light img-border align-none"><img src="{{STATIC_URL}}images/pix/slide1.jpg" width="280"  alt=""></a>
+                        <div class="clear"></div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="#" class="tipMe" title="This is a tooltip">This is a tooltip </a>, nibh ut feugiat placerat, orci lacus accumsan erat, eget porttitor arcu velit a lacus.</p>
+                        <p>Sed tempus bibendum risus, nec dignissim sem vestibulum ut. Nam iaculis aliquam elementum. Nunc sed dignissim sapien. </p>
+                    </div>
+                    <a class="read-more" href="#" title="Read more">Read more</a>
+                </div>
+                <!--/block-->
+                
+                <!--block-->
+            	<div class="block type2">
+                	<h1 class="first-word double-color">Nossos Serviços</h1>
+                    <div class="content">
+                    	<ul class="zigzag list">
+                            {% for s in servicos %}
+                            <li>
+                               <img src="{{ s.imagem.url }}" alt="" class="{% cycle 'align-right' 'align-left' %}">
+                               <a href="{% url servicos %}" title="{{ s.titulo }}"><strong>{{ s.titulo }}</strong></a>
+                                <span>{{ s.intro|truncatewords:10 }}</span>
+                            </li>
+                            {% empty %}
+                        	<li>
+                            	<img src="{{STATIC_URL}}images/icons/clipboard_48.png" alt="" class="align-right">
+                                <strong>Design web templates</strong>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... </span><a href="#" title="">more</a>
+                            </li>
+                            <li>
+                            	<img src="{{STATIC_URL}}images/icons/bug_48.png" alt="" class="align-left">
+                                <strong>Interface Development</strong>
+                                <span>Nullam vel tincidunt ligula. Donec ligula mauris, vehicula quis feugiat at. </span><a href="#" title="">more</a>
+                            </li>
+                            <li>
+                            	<img src="{{STATIC_URL}}images/icons/help_48.png" alt="" class="align-right">
+                                <strong>Support Everytime & Every Where</strong>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... </span><a href="#" title="">more</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <a class="read-more" href="#" title="Read more">Read more</a>
+                </div>
+                <!--/block-->
+                
+                <!--block-->
+            	<div class="block type3">
+                	<h1 class="first-word double-color">Nossos Produtos</h1>
+                    <div class="content">
+                        <ul class="zigzag list produtos">
+                            {% for p in produtos %}
+                            <li>
+                                <a href="{% url detalhes_produto p.slug %}" title=""><img src="{{ p.imagem|crop:'70x70' }}" alt="" class="align-left img-border"></a>
+                                <a href="{% url detalhes_produto p.slug %}" title=""><strong>{{ p.titulo }}</strong></a>
+                                <span>{{ p.descricao|truncatewords:12 }}</span>
+                            </li>
+                            {% empty %}
+                            <li>
+                                <img src="{{STATIC_URL}}images/icons/clipboard_48.png" alt="" class="align-left img-border">
+                                <strong>Design web templates</strong>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... </span><a href="#" title="">mais</a>
+                            </li>
+                            <li>
+                                <img src="{{STATIC_URL}}images/icons/bug_48.png" alt="" class="align-left img-border">
+                                <strong>Interface Development</strong>
+                                <span>Nullam vel tincidunt ligula. Donec ligula mauris, vehicula quis feugiat at. </span><a href="#" title="">mais</a>
+                            </li>
+                            <li>
+                                <img src="{{STATIC_URL}}images/icons/help_48.png" alt="" class="align-left img-border">
+                                <strong>Support Everytime & Every Where</strong>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. ... </span><a href="#" title="">mais</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <a class="read-more" href="{% url listar_produtos %}" title="Ver mais">Ver mais</a>
+                </div>
+                <!--/block-->
+            </div>
+            <!--/Entry-->
+            
+            {% include 'get_in_touch.html' %}
+            
+            
+            
+        </div>
+    </div>
+    <!--/Body content-->
+{% endblock %}

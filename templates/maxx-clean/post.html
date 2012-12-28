@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load i18n image_format %}
+
+{% block content %}
+    <!--Body content-->
+    <div class="full-width-wrapper">
+    	<div class="fixed-width-wrapper" id="body-content">
+        	<!--Content-->
+        	<div id="content" class="float-left content-left">
+            	<div class="header-text">
+                	<ul id="breadcrumbs">
+                    	<li><a href="{% url home %}" title="">Página Inicial</a></li>
+                        <li><a href="{% url artigos %}" title="">Notícias</a></li>
+                        <li class="current"><a href="{% url listar post.categoria.slug %}" title="post.categoria.nome">{{ post.categoria.nome }}</a></li>
+                    </ul>
+                    
+                    <h1 class="first-word double-color sp"><strong>Notícias</strong></h1>
+                    
+
+                </div>
+                
+                <div class="entry-heading">
+                    <div class="calendar white"><h1>{{ post.data_pub|date:'d' }}</h1><span>{{ post.data_pub|date:'M' }}</span></div>
+                    <h2 class="first-word">{{ post.titulo }}</h2>
+                    <div class="posts-info"><span class="date" title="">{{ post.data_pub|date:'M d, Y' }}</span><span class="user">{{ post.usuario }}</span><span class="category"><a href="{% url listar post.categoria.slug %}">{{ post.categoria }}</a></span></div>
+                </div>
+                
+                <div class="post entry-content sp">
+
+                    <a href="{{ post.imagem.url }}" class="preloading-light img-border align-left" rel="prettyPhoto[post]" title=""><img src="{{ post.imagem|crop:'638x246' }}" width="638" alt=""></a>
+
+                    <div class="clear"></div>
+                    
+
+                    {{ post.texto|safe }}
+
+
+                    
+				</div>
+                
+                <div class="entry-bottom">
+                	<ul class="post-tags sp overflow-hidden">
+                    	<li><span>Tags</span></li>
+                        {% for t in post.tags.all %}
+                        <li><a href="#" title="">{{ t.name|capfirst }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <!--Like box-->
+                    <div class="social-network-like-box sp clear overflow-hidden">
+                        <div class="google-plus-one-button">
+                            <!-- +1 button-->
+                            <g:plusone size="medium" href="{% url ler post.slug %}"></g:plusone>
+                        </div>
+                        <div class="twitter-tweet-button">
+                            <!-- tweet button-->
+                            <a href="http://twitter.com/share" class="twitter-share-button" data-url="{% url ler post.slug %}" data-text="Higiprag{{ p.titulo }}" data-count="horizontal">Tweet</a>
+                        </div>
+                        <div class="facebook-button">
+                            <!-- facebook like button-->
+                            <fb:like href="{% url ler post.slug %}" layout="button_count" show_faces="false" width="80"></fb:like>
+                        </div>
+                    </div>
+                    <!--/Like box-->
+
+                </div>
+              
+              
+            </div>
+            <!--/Content-->
+            
+            <!--Sidebar-->
+            <div id="sidebar" class="float-right">
+
+                {% with categoria=post.categoria %}
+
+                {% include 'blog_categories.html' %}
+
+                {% endwith %}
+
+                {% include 'blog_last_posts.html' %}
+
+                {% include 'blog_archive.html' %}
+                
+            </div>
+            <!--/Sidebar-->
+            
+           {% include 'get_in_touch.html' %}
+            
+
+        </div>
+    </div>
+{% endblock %}

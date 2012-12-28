@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load image_format i18n math_expressions%}
+
+{% block content %}
+    <!--Body content-->
+    <div class="full-width-wrapper">
+        <div class="fixed-width-wrapper" id="body-content">
+
+            <!--Sidebar-->
+            <div id="sidebar" class="float-right">
+
+                {% include 'documents_tags.html' %}
+
+                {% include 'blog_last_posts.html' %}
+
+                {% include 'services_list.html' %}
+
+
+            </div>
+            <!--/Sidebar-->
+
+
+            <!--Content-->
+            <div id="content" class="float-left content-left">
+                <div class="header-text">
+                    <ul id="breadcrumbs">
+                        <li><a href="{% url home %}" title="">Página Inicial</a></li>
+                        <li class="current"><a href="#" title="">Documentos</a></li>
+                    </ul>
+
+                    <h1 class="first-word double-color sp">Documentos</h1>
+
+                </div>
+
+
+                <div class="portfolio">
+
+                    <ul class="portfolio-main filter">
+                        <li class="active all-projects"><a href="" title="">Todos:</a></li>
+                        <li class="cat-item pdf"><a href="#" title="">Pdf</a></li>
+                        <li class="cat-item word"><a href="#" title="">Word</a></li>
+                        <li class="cat-item excel"><a href="#" title="">Excel</a></li>
+                        <li class="cat-item outros"><a href="#" title="">Outros</a></li>
+                    </ul>
+
+
+
+                    <!--Porfolio Content-->
+                    <div class="portfolio-content three-column clear">
+                        {% for d in documentos %}
+                        <div data-id="post-1" data-type="website" class="small-block {% if forloop.counter|mod:3 == 0 %}last-child-of-line{% endif %}">
+                            <a href="{{ d.arquivo }}" title="" rel="prettyPhoto"  class="img-border preloading-light align-none project-thumbnail file-download">
+                                <img src="{{ d.tipo_arquivo_imagem|crop:'185x97' }}" alt="" width="185px">
+                            </a>
+                            <h3 class="first-word">{{ d.titulo }}</h3>
+                            <p>{{ d.descricao }}</p>
+
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        {% empty %}
+                        <div data-id="post-2" data-type="motion-graphic" class="small-block" >
+                            <a href="http://www.youtube.com/watch?v=qDTKAHk_T5k&hl=en&autoplay=1" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail video-preview"><img src="{{STATIC_URL}}images/pix/motion-graphic.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Billboards</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-3" data-type="identity" class="small-block  last-child-of-line" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/identity.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">TriFold Brochure V5</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+
+
+                        <div data-id="post-4" data-type="website" class="small-block" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/website.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Lorem ipsum dolor</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-5" data-type="website" class="small-block" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/website.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Lorem ipsum dolor</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-6" data-type="logotype" class="small-block last-child-of-line" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/logo.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">FDC Illusion Logotype</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-7" data-type="identity" class="small-block" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/identity.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Photoshop Magazine Add V1</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-8" data-type="logotype" class="small-block" >
+                            <a href="{{STATIC_URL}}images/pix/Cocktail.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/logo.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Cocktail Logotype</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-9" data-type="identity" class="small-block  last-child-of-line" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/identity.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">TriFold Brochure V2</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-10" data-type="logotype" class="small-block" >
+                            <a href="{{STATIC_URL}}images/pix/tricircle.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/logo.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">TriCircle Solution Logotype</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-11" data-type="motion-graphic" class="small-block" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail video-preview"><img src="{{STATIC_URL}}images/pix/motion-graphic.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Caml and Easy</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-12" data-type="website" class="small-block last-child-of-line" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/website.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Lorem ipsum dolor</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-13" data-type="motion-graphic" class="small-block" >
+                            <a href="http://vimeo.com/31964641" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail video-preview"><img src="{{STATIC_URL}}images/pix/motion-graphic.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Movie Intro</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-14" data-type="identity" class="small-block" >
+                            <a href="{{STATIC_URL}}images/pix/demo_pretty_pt.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/identity.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Curly Brochure</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        <div data-id="post-15" data-type="logotype" class="small-block  last-child-of-line" >
+                            <a href="{{STATIC_URL}}images/pix/logo4.jpg" title="" rel="prettyPhoto" class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{STATIC_URL}}images/pix/logo.jpg" alt="" width="185px"> </a>
+                            <h3 class="first-word">Coffee Cream Logotype</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna.</p>
+                            <a class="read-more" href="#" title="Read more">Read more</a>
+                            <div class="sp"></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!--/Porfolio Content-->
+
+                    <!--Pagination-->
+                    <div class="page-pagination clear fixed-width-wrapper">
+                        <a href="#" title="">Prev</a>
+                        <a href="#" title="">1</a>
+                        <a href="#" title="" class="current">2</a>
+                        <a href="#" title="">3</a>
+                        <a href="#" title="">4</a>
+                        <a href="#" title="">5</a>
+                        <span>...</span>
+                        <a href="#" title="">15</a>
+                        <a href="#" title="">Next</a>
+
+                    </div>
+                    <!--/Pagination-->
+
+                </div>
+
+            </div>
+            <!--/Content-->
+
+
+            {% include 'get_in_touch.html' %}
+
+
+
+        </div>
+
+
+    </div>
+    <!--/Body content-->
+{% endblock %}

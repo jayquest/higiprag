@@ -1,0 +1,11 @@
+<!--box-->
+<div class="box">
+    <h1 class="first-word double-color sp">Todas as Categorias</h1>
+
+    <ul class="list cat">
+        {% for c in categorias %}
+        <li {% if categoria.slug == c.slug %}class="current"{% endif %}><a href="{% url listar c.slug %}" title="">{{ c.nome }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+<!--/box-->

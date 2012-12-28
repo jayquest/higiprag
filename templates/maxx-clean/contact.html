@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load i18n image_format form_helper %}
+
+{% block content %}
+    <!--Body content-->
+    <div class="full-width-wrapper">
+    	<div class="fixed-width-wrapper" id="body-content">
+        	<!--Content-->
+        	<div id="content" class="float-left content-left">
+            	<div class="header-text">
+                	<ul id="breadcrumbs">
+                    	<li><a href="{% url home %}" title="">Página Inicial</a></li>
+                        <li class="current"><a href="#" title="">Contato</a></li>
+                    </ul>
+                    
+                    <h1 class="first-word double-color sp">Contato</h1>
+                    
+                </div>
+                
+                <div class="post entry-content">
+                    
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nibh mi, commodo eu, pellentesque ut, blandit rutrum, ligula. <strong>Praesent ultricies urna a urna.</strong> </p>
+                    
+                    <p>Quisque massa. Cras ipsum diam, hendrerit id, accumsan sit amet, fermentum vel, dui.. Duis vulputate elit in elit. <a href="#" title="">Mauris dictum libero id justo</a>. Fusce in est. <strong>Sed nec diam</strong>. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+                  
+
+
+{#                  <div class="one-half address">#}
+{#                  	<h3 class="first-word">Head Office</h3>#}
+{#                  	<span class="map-point"></span>#}
+{#                    <p>#}
+{#                    	<strong>MaxxD Co.,ltd</strong><br>#}
+{#						No 1/28. Freelancer, City: Themforest, Country: Australia#}
+{#                    </p>#}
+{# 					<p>#}
+{#                        Tell: + 0080.0123 456 789<br>#}
+{#                        Fax: + 0080.0123 456 789#}
+{#                    </p>#}
+{#                    <p>#}
+{#                        Email: <a href="#" title="">info@maxxd.com</a><br>#}
+{#                        Website: <strong>www.maxxd.com</strong>#}
+{#					</p>#}
+{#                  </div>#}
+                  
+                  <div class="clear"></div>
+                  
+                  <h3 class="first-word"><strong>Formulário</strong> de Contato</h3>
+                  <div class="sp"></div>
+                  <p><em>Campos obrigatórios são marcados com *</em></p>
+                  
+                  <!--Contact form-->
+                  <form method="post" action="{% url contato %}" id="contact-form" class="maxx-form">
+                    {% csrf_token %}
+                    {% for f in form %}
+                    <div class="form-row">
+                        {% if f.errors %}
+                            <div class="maxx-notification error"> <a href="#" class="close" title="Close this">Close</a> <div> {{ f.errors|first }} </div> </div>
+                        {% endif %}
+                        <label class="form-row-label">{{ f.label }}:{% if f|field_is_required %}<span class="star">*</span>{% endif %}</label>
+                        {{ f }}
+                    </div>
+                    {% endfor %}
+                     <div class="form-row">
+                        <label class="form-row-label">&nbsp;</label>
+                        <button type="submit" class="black border-radius-3px bold submit" title="">Enviar Mensagem</button>
+                    </div>
+                  </form>
+                  <!--/Contact form-->
+              </div>
+            </div>
+            <!--/Content-->
+            
+            <!--Sidebar-->
+            <div id="sidebar" class="float-right">
+            	                
+                <!--box-->
+            	<div class="box address">
+
+                    <h1 class="first-word double-color sp"><strong>Endereço</strong></h1>
+                    <span class="map-point"></span>
+                    <p>
+                        <strong>Servprag Controle de Pragas LTDA.</strong><br>
+                        Av. João XXIII, 2770, São Cristovão Medianeira, Paraná, CEP 85884-000
+                    </p>
+                    <p>
+                        Telefone: (45) 3264 - 4426
+                    <br/>
+                        Email: <a href="mailto:higiprag@uol.com.br" title="">higiprag@uol.com.br</a><br>
+                    </p>
+
+            	</div>
+                <!--/box-->
+                
+                
+                <!--box-->
+            	<div class="box">
+                    <h1 class="first-word double-color sp"><strong>Localização</strong></h1>
+
+                    <div id="map_canvas" class="map" style="height: 200px; width: 276px;">
+
+                    </div>
+                    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+                    <script>
+                        jQuery(document).ready(function(){
+                            initialize();
+                        });
+
+                        var map;
+                        var marker;
+
+                        function initialize() {
+
+                            var mapOptions = {
+                                zoom: 15,
+                                mapTypeControl: false,
+                                center: new google.maps.LatLng(-25.292855,-54.102482),
+                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                            };
+
+                            map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+                            var marker = new google.maps.Marker({
+                                position: new google.maps.LatLng(-25.292855,-54.102482),
+                                map: map,
+                                title: "JWG | Soluções para internet",
+                                zIndex: 1
+                            });
+                        }
+                    </script>
+            	</div>
+                <!--/box-->
+            </div>
+            <!--/Sidebar-->
+            
+           {% include 'get_in_touch.html' %}
+            
+            
+            
+        </div>
+    </div>
+{% endblock %}
+<!--/Body content-->
