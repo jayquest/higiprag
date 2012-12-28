@@ -2,7 +2,7 @@
 
 from django.forms import CheckboxInput, CheckboxSelectMultiple
 from catalogo.models import Produto, Categoria
-from higiprag.models import Estado
+from conteudo.models import Estado
 
 __author__ = 'Johnny'
 
