@@ -661,12 +661,17 @@ h1.double-color.sp{
 	float:left;
 	margin-right:15px;
 	display:block;
-	margin-top:-5px;
+	/*margin-top:-5px;*/
 }
 .services .service-heading h3{
 	margin-bottom:5px;
-	
+    height: 50px;
 }
+
+.services .service-heading h3.first-word.single-line .cufon{
+    margin-top: 16px;
+}
+
 .services .service-heading span{
 	color:#b0b0b0;
 	font-size:11px;

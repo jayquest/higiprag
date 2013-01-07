@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% load image_format i18n %}
+{% load image_format i18n math_expressions%}
 
 {% block content %}
     <!--Body content-->
     <div class="full-width-wrapper">
     	<div class="fixed-width-wrapper" id="body-content">
         	<!--Content-->
-        	<div id="content" class="fixed-width-wrapper">
+        	<div id="content" class="float-left content-left">
             	<div class="header-text">
                 	<ul id="breadcrumbs">
                     	<li><a href="{% url home %}" title="">Página Inicial</a></li>
@@ -18,22 +18,28 @@
                 </div>
                 
                 <div class="post entry-content">
-                	<img src="images/pix/mock.png" alt="" class="align-left" >
+                    {% if texto_servico %}
+                        <img src="{{ texto_servico.imagem|scale:'347x163' }}" alt="" class="align-left" >
+
+                        <p>{{ texto_servico.texto|safe }}</p>
+                    {% else %}
+                	<img src="{{ STATIC_URL }}images/pix/mock.png" alt="" class="align-left" >
                 
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus lorem a metus aliquet non scelerisque dolor volutpat. Cras et quam quis libero semper tempus congue id lacus. Nulla et sagittis augue. </p>
                     <p>Nulla interdum mauris quis nunc tempus ac bibendum nunc volutpat. Integer gravida sapien non orci iaculis eget dictum nisl auctor. Duis vulputate hendrerit turpis in ultricies. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc sed diam quam.</p>
+                    {% endif %}
               	</div>
                 
                 <!--services-->
-                <div class="three-column fixed-width-wrapper services">
+                <div class="two-column float-left content-left services">
                     {% for s in servicos %}
 
                         <!--block-->
-                        <div class="block">
+                        <div class="block{% if forloop.counter|mod:2 == 0 %} last-child-of-line{% endif %}{% if forloop.last %} last-child{% endif %}">
                             <div class="service-heading">
                                 <img src="{{ s.imagem.url }}" height="48px" alt="" >
-                                <h3 class="first-word">{{  s.titulo }}</h3>
-                                <span>{{ s.tags.all }}</span>
+                                <h3 class="first-word {% if s.titulo|length < 28 %}single-line{% endif %}" >{{  s.titulo }}</h3>
+
                             </div>
 
                             <div class="content">
@@ -43,7 +49,6 @@
                             <a class="read-more" href="{% url detalhar_servico s.slug%}" title="Read more">Leia mais</a>
                         </div>
                         <!--/block-->
-
                     {% empty %}
                     <!--block-->
                     <div class="block">
@@ -150,23 +155,18 @@
                 
             </div>
             <!--/Content-->
-            
-           
-            <!--Get in touch-->
-            <div id="get-in-touch" class="fixed-width-wrapper">
-            	<div class="via-phone-number float-left">
-                	<a class="icon sprite float-left" title="Keep in touch with us">Keep in touch with us</a>
-                	<h2>We can Help You. Call Us <strong>+ 1 800 123 4567</strong></h2>
-                    <span>Keep in touch with our news and receive FREE THEMES</span>
-                </div>
-                <div class="via-email float-right">
-                	<form action="" method="post">
-                    	<div><input class="input-field border-radius-3px reset-text float-left" value="Enter your E-mail address..."></div>
-                        <div><button type="submit" class="black border-radius-3px float-right"><em class="sprite"></em>Subcribe !</button></div>
-                    </form>
-                </div>
+
+            <!--Sidebar-->
+            <div id="sidebar" class="float-right">
+
+                {% include 'portfolio_clientes.html'  %}
+
+                {% include 'blog_last_posts.html'  %}
+
             </div>
-            <!--/Get in touch-->
+            <!--/Sidebar-->
+
+            {% include 'get_in_touch.html' %}
             
             
             

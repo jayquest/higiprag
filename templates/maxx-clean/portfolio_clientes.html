@@ -1,0 +1,15 @@
+{% load image_format %}
+<!--box-->
+<div class="box">
+    <h1 class="first-word double-color sp">Nossos Clientes</h1>
+    <div class="clear ads overflow-hidden">
+        {% if lista_clientes %}
+        {% for c in lista_clientes %}
+        <a href="{{ c.url }}" title="{{ c.titulo }}" class="preloading-light {% cycle 'even' '' %}" style="width: 125px; height: 125px;background-position: center; background-image: url('{{ c.imagem|scale:'125x125' }}');">
+{#            <img src="{{ c.imagem|scale:'125x125' }}" alt="{{ c.titulo }}" style="visibility: visible; opacity: 1; ">#}
+        </a>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<!--/box-->

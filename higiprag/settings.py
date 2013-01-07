@@ -190,26 +190,21 @@ LOGGING = {
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': [
-            [      'Undo', 'Redo',
-                   '-', 'Bold', 'Italic', 'Underline',
-                   '-', 'Link', 'Unlink', 'Anchor',
-                   '-', 'Format',
-                   '-', 'Maximize',
-                   ],
-            [      'HorizontalRule',
-                   '-', 'Table',
-                   '-', 'BulletedList', 'NumberedList',
-                   '-', 'Cut','Copy','Paste','PasteText','PasteFromWord',
-                   '-', 'SpecialChar',
-                   '-', 'Source',
-                   '-', 'About',
-                   ]
+        'toolbar':[
+            ['Source'] ,
+            [ 'Cut','Copy','Paste','-','Undo','Redo' ],
+            [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv'],
+            [ 'Format','Font','FontSize' ],
+            '/',
+            ['RemoveFormat','-','Bold','Italic','Underline','Strike','Subscript','Superscript','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            [ 'Link','Unlink','Anchor' ],
+            [ 'TextColor','BGColor'],
+            [ 'Maximize', 'ShowBlocks'],
         ],
         'skin': 'django',
         'toolbarCanCollapse':False,
         'extraPlugins':'stylesheetparser',
-        'contentCss':[STATIC_URL+'/css/reset.css',STATIC_URL+'/css/base.css',STATIC_URL+'/css/css3.css',STATIC_URL+'/css/short-code.css'],
+        'contentsCss':['/static/css/reset.css','/static/css/base.css','/static/css/css3.css','/static/css/short-code.css','/static/css/ckeditor.css','/static/css/custom_jwg.css'],
         },
     }
 

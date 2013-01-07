@@ -21,8 +21,8 @@ def paginas_list(request):
         {'descricao':'Institucional','url':reverse('catalogo.views.listar')},
         {'descricao':'Serviços','url':reverse('portfolio.views.servicos')},
         {'descricao':'Produtos','url':reverse('catalogo.views.listar')},
-        {'descricao':'Documentos','url':reverse('conteudo.views.documentos')},
-        {'descricao':'Blog','url':reverse('blog.views.index')},
+        {'descricao':'Downloads','url':reverse('conteudo.views.documentos')},
+        {'descricao':'Nóticias','url':reverse('blog.views.index')},
         {'descricao':'Contato','url':reverse('conteudo.views.contato')},
     ]
 

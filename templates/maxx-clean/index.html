@@ -60,7 +60,7 @@
                     	<ul class="zigzag list">
                             {% for s in servicos %}
                             <li>
-                               <img src="{{ s.imagem.url }}" alt="" class="{% cycle 'align-right' 'align-left' %}">
+                               <img src="{{ s.imagem|crop:'48x48' }}" alt="" class="{% cycle 'align-right' 'align-left' %}">
                                <a href="{% url servicos %}" title="{{ s.titulo }}"><strong>{{ s.titulo }}</strong></a>
                                 <span>{{ s.intro|truncatewords:10 }}</span>
                             </li>
@@ -94,9 +94,9 @@
                         <ul class="zigzag list produtos">
                             {% for p in produtos %}
                             <li>
-                                <a href="{% url detalhes_produto p.slug %}" title=""><img src="{{ p.imagem|crop:'70x70' }}" alt="" class="align-left img-border"></a>
+                                <a href="{% url detalhes_produto p.slug %}" title=""><img src="{{ p.imagem|crop:'60x60' }}" alt="" class="align-left img-border"></a>
                                 <a href="{% url detalhes_produto p.slug %}" title=""><strong>{{ p.titulo }}</strong></a>
-                                <span>{{ p.descricao|truncatewords:12 }}</span>
+                                <span>{{ p.descricao|truncatewords:15 }}</span>
                             </li>
                             {% empty %}
                             <li>

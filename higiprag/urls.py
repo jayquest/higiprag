@@ -6,8 +6,8 @@ import settings
 custom_admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^servicos/(?P<servico>[a-zA-Z0-9_.-]+)', 'portfolio.views.detalhes_servicos', name='detalhar_servico'),
     url(r'^servicos/', 'portfolio.views.servicos', name='servicos'),
-    url(r'^servicos/ver/(?P<servico>[a-zA-Z0-9_.-]+)', 'portfolio.views.detalhes_servicos', name='detalhar_servico'),
     url(r'^contato/', 'conteudo.views.contato', name='contato'),
     url(r'^documentos/(?P<pagina>\d)?', 'conteudo.views.documentos', name='documentos'),
     url(r'^blog/', include('blog.urls')),
