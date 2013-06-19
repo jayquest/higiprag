@@ -10,7 +10,7 @@ class Texto(models.Model):
     slug = models.SlugField(max_length=120)
 
 class Configuracao(models.Model):
-    nome = models.CharField(max_length=100)
+    slug = models.CharField(max_length=100)
     descricao = models.CharField(max_length=255)
     valor = models.CharField(max_length=255)
     usuario = models.ForeignKey(User)

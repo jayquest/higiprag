@@ -7,21 +7,7 @@ from django.db.models import signals
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
 
-class Pagina(models.Model):
-    pagina_superior = models.ForeignKey('self', blank=True, null=True, related_name='subpaginas',help_text='Selecione uma pagina superior caso está página seja uma subpagina')
-    titulo = models.CharField(max_length=15)
-    breve_descricao = models.CharField(max_length=60)
-    data_publicacao = models.DateField('Inicio publicação')
-    data_fim_public = models.DateField('Término publicação')
-    slug = models.SlugField(max_length=15)
-    def __unicode__(self):
-        return self.titulo + ' - ' + self.breve_descricao
-    class Meta:
-        verbose_name = 'página'
-        verbose_name_plural = 'páginas'
-
-class Publicacao(models.Model):
-    pagina = models.ForeignKey(Pagina)
+class Institucional(models.Model):
     titulo = models.CharField(max_length=30)
     texto = models.TextField()
     data_publicacao = models.DateField()
@@ -52,6 +38,30 @@ class Contato(models.Model):
     class Meta:
         verbose_name = 'contato'
         verbose_name_plural = 'contatos'
+        permissions = (('config','Can modify contato settings'),)
+
+
+class TextoContato(models.Model):
+    titulo = models.CharField(max_length=100,null=True,blank=True)
+    texto = models.TextField()
+    slug = models.SlugField(max_length=100)
+
+class ConfiguracoesContato(models.Model):
+    razao_social = models.CharField(max_length=100,null=True,blank=True, verbose_name='razão social')
+    nome_fantasia = models.CharField(max_length=100,null=True,blank=True, verbose_name='nome fantasia')
+    endereco = models.CharField(max_length=100,verbose_name='endereço')
+    bairro = models.CharField(max_length=100)
+    cidade = models.CharField(max_length=100)
+    estado = models.CharField(max_length=100)
+    CEP = models.CharField(max_length=12,null=True,blank=True,verbose_name='CEP')
+
+    telefone = models.CharField(max_length=100,null=True,blank=True)
+    telefone_secundario = models.CharField(max_length=100,null=True,blank=True)
+    celular = models.CharField(max_length=100,null=True,blank=True)
+    celular_secundario = models.CharField(max_length=100,null=True,blank=True)
+    email = models.EmailField()
+
+    slug = models.SlugField(max_length=100)
 
 class Feature(models.Model):
     titulo = models.CharField(max_length=14)
@@ -124,7 +134,7 @@ def publicacao_pre_save(signal,instance,sender, **kwargs):
     novo_slug = slug
     contador = 0
 
-    while Publicacao.objects.filter(slug=novo_slug).exclude(id=instance.id).count() > 0:
+    while Institucional.objects.filter(slug=novo_slug).exclude(id=instance.id).count() > 0:
         contador += 1
         novo_slug = '%s-%d'%(slug, contador)
 
@@ -154,6 +164,5 @@ signals.pre_save.connect(contato_pre_save,sender=Contato)
 
 signals.post_save.connect(contato_post_save,sender=Contato)
 signals.pre_save.connect(feature_pre_save,sender=Feature)
-signals.pre_save.connect(pagina_pre_save,sender=Pagina)
-signals.pre_save.connect(publicacao_pre_save,sender=Publicacao)
+signals.pre_save.connect(publicacao_pre_save,sender=Institucional)
 

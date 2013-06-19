@@ -91,4 +91,14 @@ def contato(request):
     else:
         form = ContactForm() # An unbound form
 
-    return render_to_response('contact.html',{'form':form,'current':'contato','sucesso':sucesso},context_instance=RequestContext(request))
+    try:
+        texto_contato = TextoContato.objects.get(slug='texto_contato')
+    except:
+        texto_contato = None
+
+    try:
+        configs_contato = ConfiguracoesContato.objects.get(slug='configs_contato')
+    except:
+        configs_contato = None
+
+    return render_to_response('contact.html',{'form':form,'current':'contato','sucesso':sucesso,'texto_contato':texto_contato,'configs_contato':configs_contato},context_instance=RequestContext(request))
