@@ -8,8 +8,8 @@
         {% for s in lista_servicos %}
             {% if s.slug != servico.slug %}
             <li>
-                <div class=" {% cycle 'align-left' 'align-right' %}"><a href="{% url ler s.slug %}"><img src="{{ s.imagem.url }}" alt="{{ s.titulo }}" height="48px"></a></div>
-                <a href="{% url ler s.slug %}" title="{{ s.titulo }}"><strong>{{ s.titulo }}</strong></a>
+                <div class=" {% cycle 'align-left' 'align-right' %}"><a href="{% url 'ler' s.slug %}"><img src="{{ s.imagem.url }}" alt="{{ s.titulo }}" height="48px"></a></div>
+                <a href="{% url 'ler' s.slug %}" title="{{ s.titulo }}"><strong>{{ s.titulo }}</strong></a>
                 <span>{{ s.intro|truncatewords:10 }}</span>
             </li>
             {% endif %}

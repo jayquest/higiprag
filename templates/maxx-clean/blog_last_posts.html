@@ -8,8 +8,8 @@
         {% for p in last_posts %}
             {% if p.slug != post.slug %}
             <li>
-                <div class="img-border preloading-light {% cycle 'align-left' 'align-right' %}"><a href="{% url ler p.slug %}"><img src="{{ p.imagem|crop:'60x60' }}" alt="{{ p.titulo }}"></a></div>
-                <a href="{% url ler p.slug %}" title="{{ p.titulo }}"><strong>{{ p.titulo }}</strong></a>
+                <div class="img-border preloading-light {% cycle 'align-left' 'align-right' %}"><a href="{% url 'ler' p.slug %}"><img src="{{ p.imagem|crop:'60x60' }}" alt="{{ p.titulo }}"></a></div>
+                <a href="{% url 'ler' p.slug %}" title="{{ p.titulo }}"><strong>{{ p.titulo }}</strong></a>
                 <span>{{ p.intro|truncatewords:12 }}</span>
             </li>
             {% endif %}

@@ -11,7 +11,7 @@
                         {% for p in lista_servicos %}
                         {% if forloop.counter < 4 %}
                             <li>
-                                <a href="{% url ler p.slug %}" title="{{ p.titulo }}"><strong>{{ p.titulo }}</strong></a>
+                                <a href="{% url 'ler' p.slug %}" title="{{ p.titulo }}"><strong>{{ p.titulo }}</strong></a>
                                 <p>{{ p.intro|truncatewords:10 }}</p>
                             </li>
                         {% endif %}
@@ -34,7 +34,7 @@
                             {% if forloop.counter < 3 %}
                             <li>
                                 <div class="calendar black"><h1>{{ p.data_pub|date:'d' }}</h1><span>{{ p.data_pub|date:'M' }}</span></div>
-                                <a href="{% url ler p.slug %}" title="{{ p.titulo }}"><strong>{{ p.titulo }}</strong></a>
+                                <a href="{% url 'ler' p.slug %}" title="{{ p.titulo }}"><strong>{{ p.titulo }}</strong></a>
                                 <p>{{ p.intro|truncatewords:15 }}</p>
                             </li>
                             {% endif %}
@@ -53,7 +53,7 @@
                         {% endfor %}
                     </ul>
 
-                    <a href="{% url artigos %}" class="link view-all" title="">Ver as ultimas publicações</a>
+                    <a href="{% url 'artigos' %}" class="link view-all" title="">Ver as ultimas publicações</a>
                 </div>
             </div>
 

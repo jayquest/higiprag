@@ -19,13 +19,13 @@
         	<div id="content" class="float-right content-left">
             	<div class="header-text">
                 	<ul id="breadcrumbs">
-                    	<li><a href="{% url home %}" title="">Página Inicial</a></li>
-                        <li {% if not categoria and not subcategoria %}class="current"{% endif %}><a href="{% url listar_produtos %}" title="">Produtos</a></li>
+                    	<li><a href="{% url 'home' %}" title="">Página Inicial</a></li>
+                        <li {% if not categoria and not subcategoria %}class="current"{% endif %}><a href="{% url 'listar_produtos' %}" title="">Produtos</a></li>
                         {% if categoria %}
-                            <li {% if not subcategoria %}class="current"{% endif %}><a href="{% url listar_produtos categoria.slug%}" title="">{{ categoria.titulo }}</a></li>
+                            <li {% if not subcategoria %}class="current"{% endif %}><a href="{% url 'listar_produtos' categoria.slug%}" title="">{{ categoria.titulo }}</a></li>
                         {% endif %}
                         {% if subcategoria %}
-                            <li class="current"><a href="{% url listar_produtos categoria.slug '/' subcategoria.slug%}" title="">{{ subcategoria.titulo }}</a></li>
+                            <li class="current"><a href="{% url 'listar_produtos' categoria.slug '/' subcategoria.slug%}" title="">{{ subcategoria.titulo }}</a></li>
                         {% endif %}
 
                     </ul>
@@ -51,11 +51,13 @@
                     <div class="portfolio-content two-column clear">
                         {% for p in produtos %}
                         <div data-id="post-1" data-type="website" class="block {% cycle '' 'last-child-of-line' %}">
-                            <a href="{% url detalhes_produto p.slug%}" title="" rel=""  class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{ p.imagem|crop:'281x150' }}" alt=""> </a>
-                            <h3 class="first-word">{{ p.titulo }}</h3>
-                            <p>{{ p.descricao|truncatewords:10 }}</p>
-                            
-                            <a class="read-more" href="{% url detalhes_produto p.slug%}" title="Read more">Leia Mais</a>
+                            <a href="{% url 'detalhes_produto' p.slug%}" title="" rel=""  class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{ p.imagem|crop:'281x150' }}" alt=""> </a>
+                            <a href="{% url 'detalhes_produto' p.slug%}" class="" alt="{{ p.titulo }}" ></a><h3 class="first-word">{{ p.titulo }}</h3></a>
+{#                            <p>{{ p.descricao|truncatewords:10 }}</p>#}
+                            {% if not p.disponivel %}<h5>Não disponivel</h5>
+                            {% else %}
+                                <h5>{{ p.embalagem_venda }} - {{ p.preco }}</h5><a class="add-cart" href="#" title="Orçar">Orçar</a>
+                            {% endif %}
                             <div class="sp"></div>
                         </div>
                         {% empty %}
@@ -168,7 +170,7 @@
                         <div class="clear"></div>
                         <div class="page-pagination clear">
                             {% if produtos.has_previous and produtos.number > 3 %}
-                                <a href="{% if categoria %}{% url listar categoria.slug %}{% else %}{% url produtos %}{% endif %}" title="Ir para a primeira página">Primeira</a>
+                                <a href="{% if categoria %}{% url 'listar' categoria.slug %}{% else %}{% url 'produtos' %}{% endif %}" title="Ir para a primeira página">Primeira</a>
                             {% endif %}
 
                             {% for p in produtos.paginator.page_range %}
@@ -176,13 +178,13 @@
                                 {% if produtos.number < 3 %}
 
                                     {% if  produtos.number|add:"-4" <= p and p <= produtos.number|add:"4" %}
-                                        <a {% if p == produtos.number %} class="current" {% endif %} href="{% if categoria %}{% url produtos categoria.slug%}/{{ p }}{% else %}{% url artigos p%}{% endif %}">{{p}}</a>
+                                        <a {% if p == produtos.number %} class="current" {% endif %} href="{% if categoria %}{% url 'produtos' categoria.slug%}/{{ p }}{% else %}{% url 'artigos' p%}{% endif %}">{{p}}</a>
                                     {% endif %}
 
                                 {% else %}
 
                                     {% if  produtos.number|add:"-2" <= p and p <= produtos.number|add:"2" %}
-                                        <a {% if p == produtos.number %} class="current" {% endif %} href="{% if categoria %}{% url produtos categoria.slug%}/{{ p }}{% else %}{% url artigos p%}{% endif %}">{{p}}</a>
+                                        <a {% if p == produtos.number %} class="current" {% endif %} href="{% if categoria %}{% url 'produtos' categoria.slug%}/{{ p }}{% else %}{% url 'artigos' p%}{% endif %}">{{p}}</a>
                                     {% endif %}
 
                                 {% endif %}
@@ -191,7 +193,7 @@
 
                             <span>...</span>
                             {% if produtos.has_next and produtos.paginator.num_pages|add:'-2' > produtos.number%}
-                                <a href="{% if categoria %}{% url listar categoria.slug%}/{{ produtos.paginator.num_pages }}{% else %}{% url produtos produtos.paginator.num_pages%}{% endif %}">Ultima</a>
+                                <a href="{% if categoria %}{% url 'listar' categoria.slug%}/{{ produtos.paginator.num_pages }}{% else %}{% url 'produtos' produtos.paginator.num_pages%}{% endif %}">Ultima</a>
                             {% endif %}
                         </div>
                         <!--/Pagination-->

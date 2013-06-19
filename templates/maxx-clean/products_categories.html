@@ -6,12 +6,12 @@
     <ul class="list cat">
         {% for c in categorias_produtos %}
             {% if c.categoria_superior == None and c.produtos.count > 0%}
-            <li {% if categoria.slug == c.slug %}class="current"{% endif %}><a href="{% url listar_produtos c.slug %}" title="">{{ c.titulo }}</a>
+            <li {% if categoria.slug == c.slug %}class="current"{% endif %}><a href="{% url 'listar_produtos' c.slug %}" title="">{{ c.titulo }}</a>
                 {% if categoria.slug == c.slug %}
                 <ul>
                 {% for sub in c.subcategorias.all %}
                     {% if sub.produtos.count > 0 %}
-                    <li {% if subcategoria.slug == sub.slug %}class="current"{% endif %}><a href="{% url listar_produtos c.slug '/' sub.slug %}" title="">{{ sub.titulo }}</a></li>
+                    <li {% if subcategoria.slug == sub.slug %}class="current"{% endif %}><a href="{% url 'listar_produtos' c.slug '/' sub.slug %}" title="">{{ sub.titulo }}</a></li>
                     {% endif %}
                 {% endfor %}
                 </ul>

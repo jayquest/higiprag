@@ -9,8 +9,8 @@
         	<div id="content" class="float-left content-left">
             	<div class="header-text">
                 	<ul id="breadcrumbs">
-                    	<li><a href="{% url home %}" title="">Página Inicial</a></li>
-                        <li {% if not categoria %}class="current"{% endif %}><a href="{% url artigos %}" title="">Notícias</a></li>
+                    	<li><a href="{% url 'home' %}" title="">Página Inicial</a></li>
+                        <li {% if not categoria %}class="current"{% endif %}><a href="{% url 'artigos' %}" title="">Notícias</a></li>
                         {% if categoria %}<li class="current"><a href="#" title="{{ categoria.nome }}">{{ categoria.nome }}</a></li>{% endif %}
                     </ul>
                     
@@ -23,12 +23,12 @@
                     <ul class="list-blog-entry" id="list-blog-entry">
                     	{% for p in posts %}
                         <li>
-                        	<a href="{% url ler p.slug %}" class="preloading-light img-border" title=""><img src="{{ p.imagem|crop:'638x246' }}" alt=""></a>
+                        	<a href="{% url 'ler' p.slug %}" class="preloading-light img-border" title=""><img src="{{ p.imagem|crop:'638x246' }}" alt=""></a>
                            	<div class="blog-entry-content">
-                                <h2><a href="{% url ler p.slug %}" class="first-word">{{ p.titulo }}</a></h2>
-                                <div class="posts-info"><span class="date" title="data de publicação">{{ p.data_pub|date:'M d, Y' }}</span><span class="user"><a href="">{{ p.usuario }}</a></span><span class="category"><a href="{% url listar p.categoria.slug %}">{{ p.categoria }}</a></span></div>
+                                <h2><a href="{% url 'ler' p.slug %}" class="first-word">{{ p.titulo }}</a></h2>
+                                <div class="posts-info"><span class="date" title="data de publicação">{{ p.data_pub|date:'M d, Y' }}</span><span class="user"><a href="">{{ p.usuario }}</a></span><span class="category"><a href="{% url 'listar' p.categoria.slug %}">{{ p.categoria }}</a></span></div>
                                 <p>{{ p.intro }}</p>
-                                <a class="read-more" href="{% url ler p.slug %}" title="Ler Mais">Ler Mais</a>
+                                <a class="read-more" href="{% url 'ler' p.slug %}" title="Ler Mais">Ler Mais</a>
                             </div>
                         </li>
                         {% empty %}
@@ -105,7 +105,7 @@
                     <div class="clear"></div>
                     <div class="page-pagination clear">
                         {% if posts.has_previous and posts.number > 3 %}
-                    	<a href="{% if categoria %}{% url listar categoria.slug %}{% else %}{% url artigos %}{% endif %}" title="Ir para a primeira página">Primeira</a>
+                    	<a href="{% if categoria %}{% url 'listar' categoria.slug %}{% else %}{% url 'artigos' %}{% endif %}" title="Ir para a primeira página">Primeira</a>
                         {% endif %}
 
                         {% for p in posts.paginator.page_range %}
@@ -113,13 +113,13 @@
                             {% if posts.number < 3 %}
 
                                 {% if  posts.number|add:"-4" <= p and p <= posts.number|add:"4" %}
-                                    <a {% if p == posts.number %} class="current" {% endif %} href="{% if categoria %}{% url listar categoria.slug%}/{{ p }}{% else %}{% url artigos p%}{% endif %}">{{p}}</a>
+                                    <a {% if p == posts.number %} class="current" {% endif %} href="{% if categoria %}{% url 'listar' categoria.slug%}/{{ p }}{% else %}{% url 'artigos' p%}{% endif %}">{{p}}</a>
                                 {% endif %}
 
                             {% else %}
 
                                 {% if  posts.number|add:"-2" <= p and p <= posts.number|add:"2" %}
-                                    <a {% if p == posts.number %} class="current" {% endif %} href="{% if categoria %}{% url listar categoria.slug%}/{{ p }}{% else %}{% url artigos p%}{% endif %}">{{p}}</a>
+                                    <a {% if p == posts.number %} class="current" {% endif %} href="{% if categoria %}{% url 'listar' categoria.slug%}/{{ p }}{% else %}{% url 'artigos' p%}{% endif %}">{{p}}</a>
                                 {% endif %}
 
                             {% endif %}
@@ -128,7 +128,7 @@
 
                         <span>...</span>
                         {% if posts.has_next and posts.paginator.num_pages|add:'-2' > posts.number%}
-                            <a href="{% if categoria %}{% url listar categoria.slug%}/{{ posts.paginator.num_pages }}{% else %}{% url artigos posts.paginator.num_pages%}{% endif %}">Ultima</a>
+                            <a href="{% if categoria %}{% url 'listar' categoria.slug%}/{{ posts.paginator.num_pages }}{% else %}{% url 'artigos' posts.paginator.num_pages%}{% endif %}">Ultima</a>
                         {% endif %}
                     </div>
                     <!--/Pagination-->

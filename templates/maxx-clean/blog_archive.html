@@ -1,10 +1,25 @@
+{% load i18n  %}
+
 <!--box-->
 <div class="box">
     <h1 class="first-word double-color sp">Arquivo</h1>
 
     <ul class="list cat">
-        {% for mes in arquivo %}
-        <li><a href="{% url arquivo mes.slug %}" title="">{{ mes.data|date:'M Y' }}</a></li>
+        {% for m in arquivo %}
+            {% if not mes %}
+                {% if forloop.counter|add:'12' >= forloop.last  %}
+                <li><a href="{% url 'blog_arquivo' m.1.ano m.0%}" title="">{% trans m.1.mes%} / {{ m.1.ano }} ({{ m.1.posts }} Notícias)</a></li>
+                {% endif %}
+            {% else %}
+                {% if m.1.ano >= begin_year and m.1.ano <= end_year  %}
+                    {% if m.1.ano == begin_year and m.0 >= begin_month %}
+                    <li {% if mes_desc == m.1.mes and ano == m.1.ano%}class="current"{% endif %}><a href="{% url 'blog_arquivo' ano=m.1.ano mes=m.0%}" title="">{% trans m.1.mes%} / {{ m.1.ano }} ({{ m.1.posts }} Notícias)</a></li>
+                    {% endif %}
+                    {% if m.1.ano == end_year and m.0 <= end_month %}
+                        <li {% if mes_desc == m.1.mes and ano == m.1.ano%}class="current"{% endif %}><a href="{% url 'blog_arquivo' ano=m.1.ano mes=m.0%}" title="">{% trans m.1.mes%} / {{ m.1.ano }} ({{ m.1.posts }} Notícias)</a></li>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
         {% endfor %}
     </ul>
 </div>

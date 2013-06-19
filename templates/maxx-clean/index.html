@@ -61,7 +61,7 @@
                             {% for s in servicos %}
                             <li>
                                <img src="{{ s.imagem|crop:'48x48' }}" alt="" class="{% cycle 'align-right' 'align-left' %}">
-                               <a href="{% url servicos %}" title="{{ s.titulo }}"><strong>{{ s.titulo }}</strong></a>
+                               <a href="{% url 'servicos' %}" title="{{ s.titulo }}"><strong>{{ s.titulo }}</strong></a>
                                 <span>{{ s.intro|truncatewords:10 }}</span>
                             </li>
                             {% empty %}
@@ -94,8 +94,8 @@
                         <ul class="zigzag list produtos">
                             {% for p in produtos %}
                             <li>
-                                <a href="{% url detalhes_produto p.slug %}" title=""><img src="{{ p.imagem|crop:'60x60' }}" alt="" class="align-left img-border"></a>
-                                <a href="{% url detalhes_produto p.slug %}" title=""><strong>{{ p.titulo }}</strong></a>
+                                <a href="{% url 'detalhes_produto' p.slug %}" title=""><img src="{{ p.imagem|crop:'60x60' }}" alt="" class="align-left img-border"></a>
+                                <a href="{% url 'detalhes_produto' p.slug %}" title=""><strong>{{ p.titulo }}</strong></a>
                                 <span>{{ p.descricao|truncatewords:15 }}</span>
                             </li>
                             {% empty %}
@@ -117,7 +117,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <a class="read-more" href="{% url listar_produtos %}" title="Ver mais">Ver mais</a>
+                    <a class="read-more" href="{% url 'listar_produtos' %}" title="Ver mais">Ver mais</a>
                 </div>
                 <!--/block-->
             </div>

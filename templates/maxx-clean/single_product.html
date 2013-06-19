@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load image_format i18n %}
+
+{% block content %}
+    <!--Body content-->
+    <div class="full-width-wrapper">
+    	<div class="fixed-width-wrapper" id="body-content">
+
+            <!--Sidebar-->
+            <div id="sidebar" class="float-left">
+
+                {% include 'products_categories.html' %}
+
+            </div>
+            <!--/Sidebar-->
+
+
+            <!--Content-->
+        	<div id="content" class="float-right content-left">
+            	<div class="header-text">
+                	<ul id="breadcrumbs">
+                    	<li><a href="{% url 'home' %}" title="">Página Inicial</a></li>
+                        <li><a href="{% url 'listar_produtos' %}" title="">Produtos</a></li>
+                        {% if produto.categoria.categoria_superior %}
+                            <li><a href="{% url 'listar_produtos' produto.categoria.categoria_superior.slug%}" title="">{{ produto.categoria.categoria_superior.titulo }}</a></li>
+                        {% endif %}
+                        {% if produto.categoria %}
+                            {% if produto.categoria.categoria_superior %}
+                                {% url 'listar_produtos' produto.categoria.categoria_superior.slug '/' produto.categoria.slug as url%}
+                            {% else %}
+                                {% url 'listar_produtos' produto.categoria.slug as url%}
+                            {% endif %}
+                            <li class="current"><a href="{{ url }}" title="">{{ produto.categoria.titulo }}</a></li>
+                        {% endif %}
+
+                    </ul>
+                    
+                    <h1 class="first-word double-color sp">Produto</h1>
+                    
+                </div>
+                
+                
+                <div class="catalogo">
+               
+{#                    <ul class="portfolio-main filter"> #}
+{#                        <li class="active all-projects"><a href="#" title="">All Projects</a></li> #}
+{#                        <li class="cat-item website"><a href="#" title="">Website</a></li> #}
+{#                        <li class="cat-item logotype"><a href="#" title="">Logotype</a></li> #}
+{#                        <li class="cat-item identity"><a href="#" title="">Coporate Identity</a></li> #}
+{#                        <li class="cat-item motion-graphic"><a href="#" title="">Motion Graphic</a></li> #}
+{#                    </ul>#}
+{#                    #}
+                    
+                    
+                    <!--Porfolio Content-->
+                    <div class="catalogo-content two-column clear">
+
+                        <div class="block {% cycle '' 'last-child-of-line' %}">
+                            <a href="{{ produto.imagem.url }}" title="{{ produto.titulo }}" rel=""  class="img-border preloading-light align-none project-thumbnail image-preview"><img src="{{ produto.imagem|crop:'280x220' }}" alt=""> </a>
+                        </div>
+                        <div class="block last-child-of-line">
+                            <a href="{% url 'detalhes_produto' produto.slug%}" class="" alt="{{ produto.titulo }}" ></a><h2 class="first-word">{{ produto.titulo }}</h2></a>
+                            <p>{{ produto.descricao }}</p>
+                            {% if not produto.disponivel %}<h5>Não disponivel</h5>
+                            {% else %}
+                                <h5>{{ produto.embalagem_venda }} - {{ produto.preco }}</h5>
+                                <a class="add-cart" href="#" title="Orçar">Orçar</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                    <div class="catalogo-content clear">
+                        <h3 class="first-word"><strong>Características</strong> do Produto:</h3>
+                        <div class="block last-child-of-line">
+                            <ul>
+                            {% for c in produto.caracteristicaproduto_set.all %}
+                                <li><h5><strong>{{ c.caracteristica }}</strong> : {{ c.valor }}</h5></li>
+                            {% endfor %}
+                            </ul>
+
+                            <div class="sp"></div>
+                        </div>
+                    </div>
+                    <!--/Porfolio Content-->
+
+                    {% if produtos.has_other_pages %}
+                        <!--Pagination-->
+                        <div class="clear"></div>
+                        <div class="page-pagination clear">
+                            {% if produtos.has_previous and produtos.number > 3 %}
+                                <a href="{% if categoria %}{% url 'listar' categoria.slug %}{% else %}{% url 'produtos' %}{% endif %}" title="Ir para a primeira página">Primeira</a>
+                            {% endif %}
+
+                            {% for p in produtos.paginator.page_range %}
+
+                                {% if produtos.number < 3 %}
+
+                                    {% if  produtos.number|add:"-4" <= p and p <= produtos.number|add:"4" %}
+                                        <a {% if p == produtos.number %} class="current" {% endif %} href="{% if categoria %}{% url 'produtos' categoria.slug%}/{{ p }}{% else %}{% url 'artigos' p%}{% endif %}">{{p}}</a>
+                                    {% endif %}
+
+                                {% else %}
+
+                                    {% if  produtos.number|add:"-2" <= p and p <= produtos.number|add:"2" %}
+                                        <a {% if p == produtos.number %} class="current" {% endif %} href="{% if categoria %}{% url 'produtos' categoria.slug%}/{{ p }}{% else %}{% url 'artigos' p%}{% endif %}">{{p}}</a>
+                                    {% endif %}
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                            <span>...</span>
+                            {% if produtos.has_next and produtos.paginator.num_pages|add:'-2' > produtos.number%}
+                                <a href="{% if categoria %}{% url 'listar' categoria.slug%}/{{ produtos.paginator.num_pages }}{% else %}{% url 'produtos' produtos.paginator.num_pages%}{% endif %}">Ultima</a>
+                            {% endif %}
+                        </div>
+                        <!--/Pagination-->
+                    {% endif %}
+                
+                </div>
+                
+            </div>
+            <!--/Content-->
+            
+           
+            {% include 'get_in_touch.html' %}
+
+
+
+        </div>
+
+
+    </div>
+    <!--/Body content-->
+{% endblock %}

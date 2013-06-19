@@ -9,9 +9,9 @@
         	<div id="content" class="float-left content-left">
             	<div class="header-text">
                 	<ul id="breadcrumbs">
-                    	<li><a href="{% url home %}" title="">Página Inicial</a></li>
-                        <li><a href="{% url artigos %}" title="">Notícias</a></li>
-                        <li class="current"><a href="{% url listar post.categoria.slug %}" title="post.categoria.nome">{{ post.categoria.nome }}</a></li>
+                    	<li><a href="{% url 'home' %}" title="">Página Inicial</a></li>
+                        <li><a href="{% url 'artigos' %}" title="">Notícias</a></li>
+                        <li class="current"><a href="{% url 'listar' post.categoria.slug %}" title="post.categoria.nome">{{ post.categoria.nome }}</a></li>
                     </ul>
                     
                     <h1 class="first-word double-color sp"><strong>Notícias</strong></h1>
@@ -22,7 +22,7 @@
                 <div class="entry-heading">
                     <div class="calendar white"><h1>{{ post.data_pub|date:'d' }}</h1><span>{{ post.data_pub|date:'M' }}</span></div>
                     <h2 class="first-word">{{ post.titulo }}</h2>
-                    <div class="posts-info"><span class="date" title="">{{ post.data_pub|date:'M d, Y' }}</span><span class="user">{{ post.usuario }}</span><span class="category"><a href="{% url listar post.categoria.slug %}">{{ post.categoria }}</a></span></div>
+                    <div class="posts-info"><span class="date" title="">{{ post.data_pub|date:'M d, Y' }}</span><span class="user">{{ post.usuario }}</span><span class="category"><a href="{% url 'listar' post.categoria.slug %}">{{ post.categoria }}</a></span></div>
                 </div>
                 
                 <div class="post entry-content sp">
@@ -55,15 +55,15 @@
                     <div class="social-network-like-box sp clear overflow-hidden">
                         <div class="google-plus-one-button">
                             <!-- +1 button-->
-                            <g:plusone size="medium" href="{% url ler post.slug %}"></g:plusone>
+                            <g:plusone size="medium" href="{% url 'ler' post.slug %}"></g:plusone>
                         </div>
                         <div class="twitter-tweet-button">
                             <!-- tweet button-->
-                            <a href="http://twitter.com/share" class="twitter-share-button" data-url="{% url ler post.slug %}" data-text="Higiprag{{ p.titulo }}" data-count="horizontal">Tweet</a>
+                            <a href="http://twitter.com/share" class="twitter-share-button" data-url="{% url 'ler' post.slug %}" data-text="Higiprag{{ p.titulo }}" data-count="horizontal">Tweet</a>
                         </div>
                         <div class="facebook-button">
                             <!-- facebook like button-->
-                            <fb:like href="{% url ler post.slug %}" layout="button_count" show_faces="false" width="80"></fb:like>
+                            <fb:like href="{% url 'ler' post.slug %}" layout="button_count" show_faces="false" width="80"></fb:like>
                         </div>
                     </div>
                     <!--/Like box-->

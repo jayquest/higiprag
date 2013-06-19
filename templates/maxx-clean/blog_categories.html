@@ -4,7 +4,7 @@
 
     <ul class="list cat">
         {% for c in categorias %}
-        <li {% if categoria.slug == c.slug %}class="current"{% endif %}><a href="{% url listar c.slug %}" title="">{{ c.nome }}</a></li>
+        <li {% if categoria.slug == c.slug %}class="current"{% endif %}><a href="{% url 'listar' c.slug %}" title="">{{ c.nome }}</a></li>
         {% endfor %}
     </ul>
 </div>

@@ -9,7 +9,7 @@
         	<div id="content" class="float-left content-left">
             	<div class="header-text">
                 	<ul id="breadcrumbs">
-                    	<li><a href="{% url home %}" title="">Página Inicial</a></li>
+                    	<li><a href="{% url 'home' %}" title="">Página Inicial</a></li>
                         <li class="current"><a href="#" title="">Contato</a></li>
                     </ul>
                     
@@ -18,11 +18,15 @@
                 </div>
                 
                 <div class="post entry-content">
-                    
+
+                    {% if texto_contato %}
+                    {% if texto_contato.titulo %}<h3 class="first-word">{% with primeira=texto_contato.titulo|truncatewords:1|cut:'...' %}<strong>{{ primeira }}</strong>{{ texto_contato.titulo|cut:primeira }}{% endwith %}</h3>{% endif %}
+                    {{ texto_contato.texto|safe }}
+                    {% else %}
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nibh mi, commodo eu, pellentesque ut, blandit rutrum, ligula. <strong>Praesent ultricies urna a urna.</strong> </p>
-                    
+
                     <p>Quisque massa. Cras ipsum diam, hendrerit id, accumsan sit amet, fermentum vel, dui.. Duis vulputate elit in elit. <a href="#" title="">Mauris dictum libero id justo</a>. Fusce in est. <strong>Sed nec diam</strong>. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
-                  
+                    {% endif %}
 
 
 {#                  <div class="one-half address">#}
@@ -49,7 +53,7 @@
                   <p><em>Campos obrigatórios são marcados com *</em></p>
                   
                   <!--Contact form-->
-                  <form method="post" action="{% url contato %}" id="contact-form" class="maxx-form">
+                  <form method="post" action="{% url 'contato' %}" id="contact-form" class="maxx-form">
                     {% csrf_token %}
                     {% for f in form %}
                     <div class="form-row">
@@ -77,9 +81,26 @@
             	<div class="box address">
 
                     <h1 class="first-word double-color sp"><strong>Endereço</strong></h1>
+                    {% if configs_contato %}
+                        <span class="map-point"></span>
+                        <p>
+                            {% if configs_contato.nome_fantasia %}<strong>{{ configs_contato.nome_fantasia}}.</strong><br>{% endif %}
+                            {% if configs_contato.razao_social %}<strong>{{ configs_contato.razao_social}}.</strong><br>{% endif %}
+                            {{ configs_contato.endereco}}, {{ configs_contato.bairro }}, {{ configs_contato.cidade}}, {{ configs_contato.estado}}, CEP {{ configs_contato.CEP }}
+                        </p>
+                        <p>
+                            {% if configs_contato.telefone %}Telefone: {{ configs_contato.telefone}}<br/>{% endif %}
+                            {% if configs_contato.telefone_secundario %}Telefone: {{ configs_contato.telefone_secundario}}<br/>{% endif %}
+                            {% if configs_contato.celular %}Celular: {{ configs_contato.celular}}<br/>{% endif %}
+                            {% if configs_contato.celular_secundario %}Celular: {{ configs_contato.celular_secundario}}<br/>{% endif %}
+                            {% if configs_contato.email %}Email: <a href="mailto:{{ configs_contato.email }}" title="">{{ configs_contato.email }}</a><br>{% endif %}
+                        </p>
+                    {% else %}
                     <span class="map-point"></span>
                     <p>
-                        <strong>Servprag Controle de Pragas LTDA.</strong><br>
+                        <strong>Servprag Controle de Pragas LTDA.</strong>
+                        <strong>Servprag Controle de Pragas LTDA.</strong>
+                        <br>
                         Av. João XXIII, 2770, São Cristovão Medianeira, Paraná, CEP 85884-000
                     </p>
                     <p>
@@ -87,6 +108,7 @@
                     <br/>
                         Email: <a href="mailto:higiprag@uol.com.br" title="">higiprag@uol.com.br</a><br>
                     </p>
+                    {% endif %}
 
             	</div>
                 <!--/box-->

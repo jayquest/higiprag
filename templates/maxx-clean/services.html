@@ -9,7 +9,7 @@
         	<div id="content" class="float-left content-left">
             	<div class="header-text">
                 	<ul id="breadcrumbs">
-                    	<li><a href="{% url home %}" title="">Página Inicial</a></li>
+                    	<li><a href="{% url 'home' %}" title="">Página Inicial</a></li>
                         <li class="current"><a href="#" title="">Serviços</a></li>
                     </ul>
                     
@@ -46,7 +46,7 @@
                                 <p class="justify">{{ s.intro }}</p>
 
                             </div>
-                            <a class="read-more" href="{% url detalhar_servico s.slug%}" title="Read more">Leia mais</a>
+                            <a class="read-more" href="{% url 'detalhar_servico' s.slug%}" title="Read more">Leia mais</a>
                         </div>
                         <!--/block-->
                     {% empty %}
